@@ -1,4 +1,4 @@
-You will need MongoDB running in the background
+You will need MongoDB running in the background.
 
 Start by running "node server.js".
 
