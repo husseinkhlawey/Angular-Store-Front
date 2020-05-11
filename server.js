@@ -1,0 +1,20 @@
+/*
+  Server for the store front app. Connects to Mongo database.
+*/
+
+var express = require('express');
+const cors = require('cors');
+
+var controller = require('./serverCtrl.js');
+
+var app = express();
+app.use(cors());
+
+//static files
+app.use(express.static('./public/dist/store-front-client'));
+
+controller(app);
+
+app.listen(8080, () => {
+  console.log("App is listening on port ");
+});
