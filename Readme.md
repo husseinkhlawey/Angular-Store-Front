@@ -1,3 +1,5 @@
+Install dependencies with "npm install".
+
 You will need MongoDB running in the background.
 
 Start by running "node server.js".
