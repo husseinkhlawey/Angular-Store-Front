@@ -2,6 +2,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var mongodb = require("mongodb");
 var ObjectID = mongodb.ObjectID; //what is used by db schema
+const winston = require('winston')
 
 //process.env.MONGODB_URI
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/storedb', function (err, client) {
@@ -79,7 +80,7 @@ module.exports = function(app) {
     });
 
     app.get("/featured", function(req, res) {
-        console.log("get request recieved");
+        winston.log("get request recieved", {});
         res.json(data);
     });
 
@@ -89,7 +90,7 @@ module.exports = function(app) {
         if (err) throw err;
         else {
           //console.log("found " + req.params.tag);
-          console.log(data);
+          //console.log(data);
           res.json(data);
         }
       });
