@@ -84,10 +84,11 @@ module.exports = function(app) {
     });
 
     app.get("/search/:tag", (req, res) => {
+      console.log("searched for ", req.params.tag);
       Products.find({item: req.params.tag}, function(err, data) {
         if (err) throw err;
         else {
-          console.log("found " + req.params.tag);
+          //console.log("found " + req.params.tag);
           console.log(data);
           res.json(data);
         }
