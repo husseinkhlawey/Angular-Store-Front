@@ -9,7 +9,10 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/storedb',
     console.log(err);
     process.exit(1);
   }
-  useNewUrlParser: true
+  else {
+    useNewUrlParser: true;
+    console.log(mongoose.connection.host,mongoose.connection.port);
+  }
   //db = client.db();
 });
 
