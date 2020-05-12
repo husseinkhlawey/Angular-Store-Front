@@ -80,7 +80,7 @@ module.exports = function(app) {
     });
 
     app.get("/featured", function(req, res) {
-        winston.log("get request recieved", {});
+        console.log("get request recieved");
         res.json(data);
     });
 
