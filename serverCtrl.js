@@ -1,14 +1,32 @@
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var mongodb = require("mongodb");
+var ObjectID = mongodb.ObjectID; //what is used by db schema
 
-mongoose.connect('mongodb://localhost:27017/storedb', {useNewUrlParser: true});
+//process.env.MONGODB_URI
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/storedb', function (err, client) {
+  if (err) {
+    console.log(err);
+    process.exit(1);
+  }
+  useNewUrlParser: true
+  //db = client.db();
+});
+
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'db connection error:'));
 
 module.exports = function(app) {
 
+  //only start when connected
   db.once("open", function() {
     console.log("db connected");
+
+    // Generic error handler used by all endpoints.
+    function handleError(res, reason, message, code) {
+      console.log("ERROR: " + reason);
+      res.status(code || 500).json({"error": message});
+    }
 
     //the db schema
     var productSchema = new mongoose.Schema({

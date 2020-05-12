@@ -16,5 +16,6 @@ app.use(express.static('./public/dist/store-front-client'));
 controller(app);
 
 app.listen(process.env.PORT || 8080, () => {
-  console.log("App is listening on port ");
+  var port = server.address().port;
+  console.log("App is listening on port ", port);
 });
