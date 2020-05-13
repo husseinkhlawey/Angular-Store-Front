@@ -18,5 +18,5 @@ controller(app);
 
 var server = app.listen(process.env.PORT || 8080, () => {
   var port = server.address().port;
-  console.log("App is listening on port ", port);
+  console.log("App is listening on port", port);
 });
