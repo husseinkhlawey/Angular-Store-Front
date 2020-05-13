@@ -4046,7 +4046,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         _classCallCheck(this, FeaturedItemsComponent);
 
         this.ProductsService = ProductsService;
-        this.productsUrl = "http://localhost:8080/featured";
+        this.productsUrl = "/featured";
       }
 
       _createClass(FeaturedItemsComponent, [{
@@ -4530,7 +4530,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(ProductsService, [{
         key: "getFeatured",
         value: function getFeatured() {
-          return this.httpService.get("http://localhost:8080/featured").pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (data) {
+          return this.httpService.get("/featured").pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (data) {
             return data.map(function (data) {
               return new _models_product_model__WEBPACK_IMPORTED_MODULE_1__["Product"]().deserialize(data);
             });
@@ -4539,7 +4539,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getSearchRes",
         value: function getSearchRes(tag) {
-          return this.httpService.get("http://localhost:8080/search/" + tag).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (data) {
+          return this.httpService.get("/search/" + tag).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (data) {
             return data.map(function (data) {
               return new _models_product_model__WEBPACK_IMPORTED_MODULE_1__["Product"]().deserialize(data);
             });

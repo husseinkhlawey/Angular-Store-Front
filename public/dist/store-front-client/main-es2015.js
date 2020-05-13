@@ -3208,7 +3208,7 @@ function FeaturedItemsComponent_div_1_Template(rf, ctx) { if (rf & 1) {
 class FeaturedItemsComponent {
     constructor(ProductsService) {
         this.ProductsService = ProductsService;
-        this.productsUrl = "http://localhost:8080/featured";
+        this.productsUrl = "/featured";
     }
     getAllProducs() {
         this.ProductsService.getFeatured().subscribe(products => {
@@ -3441,10 +3441,10 @@ class ProductsService {
         this.httpService = httpService;
     }
     getFeatured() {
-        return this.httpService.get("http://localhost:8080/featured").pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(data => data.map(data => new _models_product_model__WEBPACK_IMPORTED_MODULE_1__["Product"]().deserialize(data))));
+        return this.httpService.get("/featured").pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(data => data.map(data => new _models_product_model__WEBPACK_IMPORTED_MODULE_1__["Product"]().deserialize(data))));
     }
     getSearchRes(tag) {
-        return this.httpService.get("http://localhost:8080/search/" + tag).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(data => data.map(data => new _models_product_model__WEBPACK_IMPORTED_MODULE_1__["Product"]().deserialize(data))));
+        return this.httpService.get("/search/" + tag).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(data => data.map(data => new _models_product_model__WEBPACK_IMPORTED_MODULE_1__["Product"]().deserialize(data))));
     }
 }
 ProductsService.ɵfac = function ProductsService_Factory(t) { return new (t || ProductsService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"])); };
