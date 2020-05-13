@@ -46,6 +46,7 @@ module.exports = function(app) {
       rating: String,
       link: String,
       sale: String,
+      sale_price: String,
       featured: String,
       comp: String,
       deliver: String,
@@ -57,12 +58,22 @@ module.exports = function(app) {
     var Products = mongoose.model('Products', productSchema);
 
     //adding items to collection
+    var feat_data = [
+      { "item": "shelf", "name": "Floating Shelf", "price": "$99.99", "rating": "5", "link": "assets/images/reclaimed-wood-floating-shelf.jpg", "sale": "false", "featured": "true", "comp": "Ikea", "deliver": "7", "available": "In stock", "logo": "assets/images/ikea_logo.jpg"},
+      { "item": "chair", "name": "Swivel Chair","price": "$69.99", "rating": "5", "link": "assets/images/ikea_swivle_chair.webp",   "sale": "false", "featured": "true", "comp": "Ikea", "deliver": "2", "available": "In stock", "logo": "assets/images/ikea_logo.jpg"},
+      { "item": "table", "name": "Dining Table",  "price": "$74.99", "rating": "5",   "link": "assets/images/dining_table.webp", "sale": "false", "featured": "true", "comp": "Ikea", "deliver": "3", "available": "in stock", "logo": "assets/images/ikea_logo.jpg"}
+    ];
+
     var data = [
-      { "item": "shelf", "name": "Floating Shelf", "price": "$100", "rating": "5", "link": "assets/images/reclaimed-wood-floating-shelf.jpg", "sale": "true", "featured": "true", "comp": "Ikea", "deliver": "7", "available": "In stock"},
-      { "item": "table", "name": "Black Table","price": "$50", "rating": "3", "link": "assets/images/ikea_table.webp",   "sale": "true", "featured": "true", "comp": "Ikea", "deliver": "2", "available": "in stock"},
-      { "item": "chair", "name": "Swivel Chair","price": "$59.99", "rating": "4", "link": "assets/images/ikea_swivle_chair.webp",   "sale": "true", "featured": "true", "comp": "Ikea", "deliver": "2", "available": "In stock", "logo": "assets/images/ikea_logo.jpg"}
-      //{ "item": "table", "name": "Dining Table",  "price": "$75", "rating": "4",   "link": "assets/images/dining_table.webp", "sale": "true", "featured": "true", "comp": "Ikea", "deliver": "3", "available": "in stock"}
-    ]
+      { "item": "shelf", "name": "Floating Shelf", "price": "$99.99", "rating": "5", "link": "assets/images/reclaimed-wood-floating-shelf.jpg", "sale": "false", "featured": "true", "comp": "Ikea", "deliver": "7", "available": "In stock", "logo": "assets/images/ikea_logo.jpg"},
+      { "item": "chair", "name": "Swivel Chair","price": "$69.99", "rating": "5", "link": "assets/images/ikea_swivle_chair.webp",   "sale": "false", "featured": "true", "comp": "Ikea", "deliver": "2", "available": "In stock", "logo": "assets/images/ikea_logo.jpg"},
+      { "item": "table", "name": "Dining Table",  "price": "$74.99", "rating": "5",   "link": "assets/images/dining_table.webp", "sale": "false", "featured": "true", "comp": "Ikea", "deliver": "3", "available": "in stock", "logo": "assets/images/ikea_logo.jpg"},
+
+      { "item": "table", "name": "Black Table","price": "$49.99", "rating": "3", "link": "assets/images/ikea_table.webp",   "sale": "true", "sale_price": "$24.99", "featured": "true", "comp": "Ikea", "deliver": "2", "available": "4 remaining", "logo": "assets/images/ikea_logo.jpg"},
+      { "item": "chair", "name": "Black Stool & Cover","price": "$19.99", "rating": "4", "link": "assets/images/ikea_stool.webp",   "sale": "false", "featured": "false", "comp": "Ikea", "deliver": "2", "available": "In stock", "logo": "assets/images/ikea_logo.jpg"},
+      { "item": "shelf", "name": "White Shelf Unit","price": "$99.00", "rating": "4", "link": "assets/images/ikea_white_shelf.webp",   "sale": "true", "sale_price": "$79.99", "featured": "false", "comp": "Ikea", "deliver": "12", "available": "In stock", "logo": "assets/images/ikea_logo.jpg"}
+
+    ];
 
     db.db.collection("products").drop();
 
@@ -89,7 +100,7 @@ module.exports = function(app) {
 
     app.get("/featured", function(req, res) {
         console.log("SEND FEATURED");
-        res.json(data);
+        res.json(feat_data);
     });
 
     //searches item with what was passed through search bar.
