@@ -4,6 +4,7 @@
 
 var express = require('express');
 const cors = require('cors');
+const winston = require('winston')
 
 var controller = require('./serverCtrl.js');
 
@@ -15,6 +16,7 @@ app.use(express.static('./public/dist/store-front-client'));
 
 controller(app);
 
-app.listen(process.env.PORT || 8080, () => {
-  console.log("App is listening on port ");
+var server = app.listen(process.env.PORT || 8080, () => {
+  var port = server.address().port;
+  console.log("App is listening on port", port);
 });
