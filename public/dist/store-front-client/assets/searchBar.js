@@ -15,15 +15,15 @@ var seaResFunc = (function() {
 
       //addItem('reclaimed-wood-floating-shelf.jpg','floating shelf 2','$550',3);
       for (var i = 0; i < products.length; i++) {
-        addItem(newPL, products[i].link, products[i].name, products[i].price,
-                products[i].rating, products[i].comp, products[i].deliver, products[i].available);
+        addItem(newPL, products[i].link, products[i].name, products[i].price, products[i].sale, products[i].sale_price,
+                products[i].rating, products[i].comp, products[i].deliver, products[i].available, products[i].logo);
       }
     }
   }
 })(seaResFunc || {})
 
 //dynamically add search results to webpage
-function addItem(newPL, img, name, price, rating, company, days, ava) {
+function addItem(newPL, img, name, price, sale, salePrc, rating, company, days, ava, logo) {
 
   var newEle = document.createElement('div');
   newEle.setAttribute('_ngcontent-imk-c21', "");
@@ -47,21 +47,45 @@ function addItem(newPL, img, name, price, rating, company, days, ava) {
 
   var comp = document.createElement('div');
   comp.setAttribute('class', "company");
-  comp.innerText = company;
+  comp.innerText = "by " + company;
   product_text.appendChild(comp);
 
+  if (logo) {
+  var pL = document.createElement('img');
+  pL.setAttribute('class', "found_item_logo");
+  pL.src = logo;
+  product_text.appendChild(pL);
+  }
   var br = document.createElement('br');
   product_text.appendChild(br.cloneNode(true));
 
   var pDiv = document.createElement('div');
   pDiv.setAttribute('class', "price");
-  pDiv.innerText= price;
+
+  if (sale == "true") {
+    var stkThr = document.createElement('del');
+    stkThr.innerText = price;
+    pDiv.appendChild(stkThr);
+
+    var newP = document.createElement('div');
+    newP.setAttribute('class', "sale_price");
+    newP.innerText = salePrc;
+    pDiv.appendChild(newP);
+  }
+  else {
+    pDiv.innerText= price;
+  }
+
   product_text.appendChild(pDiv);
 
   var del = document.createElement('div');
   del.setAttribute('class', "delivery");
   del.innerText= days + " day shipping available";
   product_text.appendChild(del);
+
+  var truck = document.createElement('i');
+  truck.setAttribute('class', "fa fa-truck");
+  product_text.appendChild(truck);
 
   product_text.appendChild(br.cloneNode(true));
 
@@ -87,6 +111,17 @@ function addItem(newPL, img, name, price, rating, company, days, ava) {
   pAva.setAttribute('class', "availability");
   pAva.innerText= ava;
   product_text.appendChild(pAva);
+
+  var chk = document.createElement('i');
+  chk.setAttribute('class', "fa fa-check-circle");
+  product_text.appendChild(chk);
+
+  if (sale == "true") {
+    var sicon = document.createElement('div');
+    sicon.setAttribute('class', "sale_icon");
+    sicon.innerText = "sale";
+    product_text.appendChild(sicon);
+  }
 
   product_info.appendChild(product_text);
   newEle.appendChild(product_info);
